@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "movie.url",
+      "type": "java.lang.String",
+      "description": "Url forMovieService"
+  }
+] }

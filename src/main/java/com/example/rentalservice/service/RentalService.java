@@ -1,7 +1,7 @@
 package com.example.rentalservice.service;
 
 import com.example.rentalservice.model.Movie;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,18 +9,23 @@ import org.springframework.web.client.RestTemplate;
 public class RentalService {
 
     private final RestTemplate restTemplate;
+    @Value("${movie.url}")
+    private String movieUrl;
 
     public RentalService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public String findMovieById(Long id) {
-        ResponseEntity<String> forEntity1 = restTemplate.getForEntity("http://localhost:8080", String.class);
-        String forEntity = forEntity1.getBody();
-        return forEntity;
-    }
 
     public Movie getMovie(Long id) {
-        return null;
+        return restTemplate.getForEntity(movieUrl + id, Movie.class).getBody();
+    }
+
+    public void returnMovie(Long id) {
+        restTemplate.put(movieUrl + "return/" + id, null);
+    }
+
+    public void rentMovie(Long id) {
+        restTemplate.put(movieUrl + "rent/" + id, null);
     }
 }

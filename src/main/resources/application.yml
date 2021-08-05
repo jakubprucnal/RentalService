@@ -1,3 +1,7 @@
 server:
   port:
     8081
+
+movie:
+  url:
+    http://localhost:8080/movies/
