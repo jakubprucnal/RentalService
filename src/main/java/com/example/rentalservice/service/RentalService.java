@@ -28,4 +28,9 @@ public class RentalService {
     public void rentMovie(Long id) {
         restTemplate.put(movieUrl + "rent/" + id, null);
     }
+
+    public void exception() {
+        restTemplate.getForEntity(movieUrl + "exception/", null).getBody();
+    }
+
 }
